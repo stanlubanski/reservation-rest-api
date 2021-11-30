@@ -3,6 +3,7 @@ package pl.stanlubanski.parkingplacereservation;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Reservation {
@@ -59,6 +60,28 @@ public class Reservation {
     public void setForDisabled(String forDisabled) {
         this.forDisabled = forDisabled;
     }
+    @Override
+    public boolean equals(Object o) {
 
+        if (this == o)
+            return true;
+        if (!(o instanceof Reservation))
+            return false;
+        Reservation reservation = (Reservation) o;
+        return Objects.equals(this.reservationId, reservation.reservationId) && Objects.equals(this.clientName, reservation.clientName)
+                && Objects.equals(this.spotNumber, reservation.spotNumber) && Objects.equals(this.spotLevel, reservation.spotLevel)
+                && Objects.equals(this.forDisabled, reservation.forDisabled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.reservationId, this.clientName, this.spotNumber, this.spotLevel, this.forDisabled);
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" + "id=" + this.reservationId + ", name='" + this.clientName + '\'' + ", spot number='" + this.spotNumber + '\''
+                + ", spot level='" + this.spotLevel + ", for disabled='" + this.forDisabled + '\'' + '}';
+    }
 }
 
